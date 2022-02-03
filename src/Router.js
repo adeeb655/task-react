@@ -1,27 +1,26 @@
-import { BrowserRouter,Route,Routes } from "react-router-dom";
-import { AboutUsPage } from "./page/Index";
-import {Login, Resgester} from "./componenets/Index"
-// import {Dashboard} from "./page/index"
-// import {Header} from "./modules/index"
-// import {Basicform} from "./components/form/index"
-
-const RouterPage =()=>{
+import { BrowserRouter,Routes,Route } from "react-router-dom";
+import { Dashboard,AboutUs, Contact, Login, LoginProfile, ModalPage, Signup, Loginup, EditUser } from "./page/Index";
+import { PageError, PrivateRoute, PublicRoute} from "./components/Index";
+import { Adduser,Edituser,User } from "./Crud/forms/index";
+const Router = (props) =>{
     return(
-        <BrowserRouter>
-        <Routes>
-            <Route path="/about" element={<AboutUsPage/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/Resgester" element={<Resgester/>}/>
-
-            
-
-            {/* <Route path="/dasboard" element={<Dashboard/>}/>
-            <Route path="/header" element={<Header/>}/>
-            <Route path="/basicform" element={<Basicform/>}/> */}
-
-            </Routes>
+        <>
+      <BrowserRouter>
+      <Routes>
+          <Route path="/login" element={<Login/>} />
+          <Route path="/modal" element={<ModalPage/>} />
+          <Route path="/form" element={<Adduser/>} />
+          <Route path="/edit" element={<Edituser/>} />
+          <Route path="/user" element={<User/>} />
+          <Route path="/logindata" element={<LoginProfile />} />
+            <Route path="/Dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
+            <Route path="/aboutUs"  element={<AboutUs {...props} />} />
+            <Route path="/" element={<PublicRoute><Signup /></PublicRoute>} />
+          <Route path="/loginup" element={ <PublicRoute><Loginup /></PublicRoute>} />
+            <Route path="*" element={<PageError/>}/>
+        </Routes>
         </BrowserRouter>
-        
-    );
+        </>     
+    )
 }
-export default RouterPage;
+export default Router;
